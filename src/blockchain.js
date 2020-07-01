@@ -76,7 +76,6 @@ class Blockchain {
                 block.hash = SHA256(JSON.stringify(block)).toString();
                 self.chain.push(block);
                 this.height = newBlockHeight;
-                console.log('this.heigh', this.height);
                 console.info('New block successfully added into the blockchain');
                 resolve(block)
             } catch (error) {
@@ -132,7 +131,7 @@ class Blockchain {
             const currentTime = parseInt(this.getCurrentTime());
 
             // check if time elapsed is less than 5 minutes
-            if (timeFromMessageSent - currentTime > 300) reject(new Error('Time elapse!'))
+            if (timeFromMessageSent - currentTime > 300) reject(new Error('Time elapsed!'))
 
             // Verify the message with wallet address and signature:
             const verifyMessage = bitcoinMessage.verify(message, address, signature);
@@ -157,7 +156,6 @@ class Blockchain {
     getBlockByHash(hash) {
         let self = this;
         return new Promise((resolve, reject) => {
-            console.log('self.chain ', self.chain);
             let block = self.chain.filter(blockchain => blockchain.hash === hash)[0];
             if(block){
                 resolve(block);
